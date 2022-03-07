@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Ephemera at the Smithsonian</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--libraries-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="scroll-down.js"></script>
+
+    <!--fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&family=Spartan:wght@100;400&family=Zilla+Slab:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+
+<body>
+
+
+    <div class="container">
+        <!--modal content-->
+        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="exampleModalLabel"></h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-md-5 ml-auto" id="imagemodal">
+                                    <img id="imageMagnify" src="" width="" height=""></img>
+                                </div>
+                                <div class="col-md-7 ml-auto">
+                                    <h3 id="dateHere"></h3>
+                                    <h4 id="typeHere"></h4>
+                                    <p id="descriptionHere"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Beeswarm Graph-->
+        <div class="row align-items-center align-self-center">
+            <div class="col-sm-2 type-static padding-0" id="checkboxes">
+                <p style="font-size:17px; text-align:left; color:#dfdfdf;">
+                    <strong>Filter Ephemera</strong><br>
+                    <span class="type" style="--n:53">
+                        to see trends throughout history
+                    </span>
+                </p>
+                <!--<p style="font-size: 18px; text-align: center">Filter Types of <strong style="font-size: 24px">Ephemera</strong><br>from the collection</p>-->
+                <!--<span style="position:relative; top: 5px; font-size: 16px; padding:20px;">Ephemera Type:</span>-->
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <!--<span class="checkmark" id="signsColor" style="font-size: 24px; color: #ba8a30;">&#9679;&nbsp;</span>-->
+                    <input type="checkbox" value="signs" class="mdl-checkbox__input typeSort" checked=""> Signs
+                </label>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <!--<span class="mdl-checkbox__label" id="postersColor" style="font-size: 24px; color: #db666f;">&#9679;&nbsp;</span>-->
+                    <input type="checkbox" value="posters" class="mdl-checkbox__input typeSort" checked=""> Posters
+                </label>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <!--<span class="mdl-checkbox__label" id="placardsColor" style="font-size: 24px; color: #5c86aa;">&#9679;&nbsp;</span>-->
+                    <input type="checkbox" value="placards" class="mdl-checkbox__input typeSort" checked=""> Placards
+                </label>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <!--<span class="mdl-checkbox__label" id="correspondenceColor" style="font-size: 24px; color: #a53d24;">&#9679;&nbsp;</span>-->
+                    <input type="checkbox" value="correspondence" class="mdl-checkbox__input typeSort" checked=""> Correspondence
+                </label>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <!--<span class="mdl-checkbox__label" id="pamphletsColor" style="font-size: 24px; color: #76943c;">&#9679;&nbsp;</span>-->
+                    <input type="checkbox" value="pamphlets" class="mdl-checkbox__input typeSort" checked=""> Pamphlets
+                </label>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <!--<span class="mdl-checkbox__label" id="fliersColor" style="font-size: 24px; color: #66988d;">&#9679;&nbsp;</span>-->
+                    <input type="checkbox" value="fliers" class="mdl-checkbox__input typeSort" checked=""> Fliers
+                </label>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <!--<span class="mdl-checkbox__label" id="buttonsColor" style="font-size: 24px; color: #d4c874;">&#9679;&nbsp;</span>-->
+                    <input type="checkbox" value="buttons" class="mdl-checkbox__input typeSort" checked=""> Buttons
+                </label>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                    <!--<span class="mdl-checkbox__label" id="otherColor" style="font-size: 24px; color: #ba5f41;">&#9679;&nbsp;</span>-->
+                    <input type="checkbox" value="other" class="mdl-checkbox__input typeSort" checked=""> Other
+                </label>
+                <div>
+                    <p class="type-static" style="color:#dfdfdf; text-align:left; font-size:17px;">
+                        <br><br><br><br><br>
+                        <strong>Click Arrow</strong>
+                        <span class="type" style="--n:53">
+                            to sort <br> the collection by documented movements
+                        </span><br>
+                        <!--<span style="font-size: 50px">&#11022;</span>-->
+                    </p>
+                    <br><br><br><br>
+                    <a class="ct-btn-scroll ct-js-btn-scroll" href="#section2" style="font-size:25px; color:#b9b6af; text-align:center; text-decoration:none">&#11206;</a>
+
+                </div>
+            </div>
+            <div class="col-lg-10 padding-0" id="svgbeeswarm"></div>
+        </div>
+
+        <!--Transition Text -->
+        <div class="row align-items-center align-self-center">
+            <div class="col-sm-2">
+                <span style="font-size:20px; color:#b9b6af" ; "text-align: center">&#11206;&#11206;&#11206;</span>
+            </div>
+        </div>
+
+        <div class="row align-items-center align-self-center">
+            <div class="col-md-6">
+                <div>
+                    <p class="first-phrase" style="font-family: zilla slab; color:#b9b6af;">
+                        How does ephemera shape a movement?
+                        <!--<span style="font-size:px; color:#b9b6af" ; "text-align: center">&#11191;</span> -->
+                    </p>
+                </div>
+                <br>
+            </div> 
+        </div>
+
+        <!--Cluster Graph -->
+        <section id="section2">
+            <div class="row align-items-center align-self-center">
+                <div class="col-md-6" id="toolbar">
+                    <button id="all" class="button active">All</button>
+                    <button id="Movement" class="button">By Movement</button>
+                    <button id="typeSort" class="button">By Type</button>
+                    <!--<button id="dateSort" class="button">By Year</button>-->
+                </div>
+            </div>
+
+            <div class="row align-items-center align-self-center">
+                <div class="col-lg-10 padding-0" id="svgclusters"></div>
+            </div>
+        </section>
+
+    </div>
+    </div>
+
+
+
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="beeswarm.js"></script>
+    <script src="clusters.js"></script>
+
+
+
+
+</body>
+
+</html>

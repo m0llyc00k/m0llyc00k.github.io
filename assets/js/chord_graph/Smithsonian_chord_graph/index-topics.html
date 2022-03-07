@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+
+.node {
+  font: 300 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  fill: #bbb;
+}
+
+.node:hover {
+  fill: #000;
+  font-size: 12px;
+}
+
+
+.link {
+  stroke: steelblue;
+  stroke-opacity: 0.3;
+  fill: none;
+  pointer-events: none;
+}
+
+
+.node:hover,
+.node--source,
+.node--target {
+  font-weight: 500;
+  font-size: 12px
+}
+
+
+.node--source {
+  fill: #2ca02c;
+   
+}
+
+.node--target {
+  fill: #662ca0;
+   
+}
+
+.link:hover,
+.link--source,
+.link--target{
+  stroke-opacity: 1; 
+  stroke-width: 2px;
+}
+
+
+.link--source {
+  stroke: #662ca0;
+}
+
+
+.link--target {
+  stroke: #2ca02c;
+
+}
+
+
+</style>
+<body>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+var diameter = 950,
+    radius = diameter / 2,
+    innerRadius = radius - 195;
+
+var cluster = d3.cluster()
+    .size([358, innerRadius]);
+
+var line = d3.radialLine()
+    .curve(d3.curveBundle.beta(.7))
+    .radius(function(d) { return d.y+5; })
+    .angle(function(d) { return d.x / 180 * Math.PI; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", 2000)
+    .attr("height", 2000)
+    .append("g")
+    .attr("transform", "translate(800, 800)");
+    
+
+var link = svg.append("g").selectAll(".link");
+var node = svg.append("g").selectAll(".node");
+
+d3.csv("topics_titles_dataFinal.csv", function(error, topics) {
+  if (error) throw error;
+  
+  var titles = topicsTotitles( topics );
+
+  var root = packageHierarchy(titles)
+      .sum(function(d) { return d.size; });
+
+  cluster(root);
+
+  link = link
+    .data(packageImports(root.leaves()))
+    .enter().append("path")
+      .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
+      .attr("class", "link")
+      .attr("d", line);
+
+  node = node
+    .data(root.leaves())
+    .enter().append("text")
+      .attr("class", "node")
+      .attr("dy", "0.31em")
+      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 10) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+      .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+      .text(function(d) { 
+		if( d.data.key != "TITLE")
+			return d.data.key; 
+	  })
+      .on("mouseover", mouseovered)
+      .on("mouseout", mouseouted);
+});
+
+
+
+function mouseovered(d) {
+
+node
+  .each(function(n) { n.target = n.source = false; })
+
+
+  link
+      .classed("link--target", function(l) { if (l.target === d) return l.source.source = true})
+      .classed("link--source", function(l) { if (l.source === d) return l.target.target = true})
+      .filter(function(l) { return l.target === d || l.source === d})
+      // .style('opacity', function (link_d) { return link_d.source === d.source || link_d.target === d.target ? 1 : 0;})
+      
+
+  
+ 
+  node
+      .classed("node--target", function(n) { return n.target; })
+      .classed("node--source", function(n) { return n.source; })
+      
+      
+
+
+  d3.selectAll(".node")
+      .transition()
+      .duration(200)
+      .style("opacity", 1)
+    d3.select(this)
+      .transition()
+      .duration(200)
+      .style("opacity", 1)
+      
+    d3.selectAll(".node--target")
+      .transition()
+      .duration(200)
+      .style("opacity", '1 !important')
+    d3.select(this)
+      .transition()
+      .duration(200)
+      .style("opacity", '1 !important')
+      
+            
+    d3.selectAll(".node--source")
+      .transition()
+      .duration(200)
+      .style("opacity", '1 !important')
+    d3.select(this)
+      .transition()
+      .duration(200)
+      .style("opacity", '1 !important')
+      
+    d3.selectAll(".link")
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+    d3.selectAll(".link--target")
+      .transition()
+      .duration(200)
+      .style("opacity", 1)
+    d3.selectAll(".link--source")
+      .transition()
+      .duration(200)
+      .style("opacity", 1)
+
+};
+
+
+
+
+
+function mouseouted(d) {
+  
+  
+  link
+      .classed("link--target", false)
+      .classed("link--source", false)
+      .transition()
+
+    node
+     
+      .classed("node--target", false)
+      .classed("node--source", false)
+      .transition()
+
+  d3.selectAll(".node")
+      .transition()
+      .duration(100)
+      .style("opacity", 1)
+    d3.select(this)
+      .transition()
+      .duration(100)
+      .style("opacity", 1)
+
+    d3.selectAll(".node--target")
+      .transition()
+      .duration(100)
+      .style("opacity", '1 !important')
+    d3.select(this)
+      .transition()
+      .duration(100)
+      .style("opacity", '1 !important')
+
+    d3.selectAll(".link")
+      .transition()
+      .duration(100)
+      .style("opacity", 1)
+    d3.selectAll(".link--target")
+      .transition()
+      .duration(100)
+      .style("opacity", 0)
+    d3.selectAll(".link--source")
+      .transition()
+      .duration(100)
+      .style("opacity", 0)
+
+}
+
+
+
+//  construct the package hierarchy from class names.
+function packageHierarchy(titles) {
+  var map = {};
+
+  function find(name, data) {
+    var node = map[name], i;
+    if (!node) {
+      node = map[name] = data || {name: name, children: []};
+      if (name.length) {
+        node.parent = find(name.substring(0, i = name.lastIndexOf(".")));
+        node.parent.children.push(node);
+        node.key = name.substring(i + 1);
+      }
+    }
+    return node;
+  }
+  
+
+  titles.forEach(function(d) {
+	if( typeof d.name != 'undefined')
+		find(d.name, d);
+  });
+
+  return d3.hierarchy(map[""]);
+}
+
+// Return a list of imports for the given array of nodes.
+function packageImports(nodes) {
+  var map = {},
+      imports = [];
+
+  // Compute a map from name to node.
+  nodes.forEach(function(d) {
+    map[d.data.name] = d;
+  });
+
+  // For each import, construct a link from the source to target node.
+  nodes.forEach(function(d) {
+    if (d.data.imports) 
+		d.data.imports.forEach(function(i) {
+			var input = map[d.data.name];
+			var mapi = map[i];
+			if( typeof mapi != 'undefined'){
+				var path = input.path(mapi);
+				imports.push(path);
+			}
+		});
+  });
+
+  return imports;
+}
+
+function topicsTotitles(topics){
+ var classArray = [];
+
+ for( var column =0; column < topics.columns.length; column++){
+	 var classObj = {};
+	 classObj.name =  topics.columns[column];
+	 classObj.size = 1;
+	 classObj.imports=[];
+	 classArray.push(classObj);
+ }
+ for(var row =1; row < topics.length; row++){
+ 	var classObj = {};
+	var contributor = topics[row];
+	classObj.name = contributor["TITLE"];
+	classObj.imports=[];
+
+	var size =1;
+	for( var column = 0; column < topics.columns.length;column++){
+		if( contributor[topics.columns[column]]==1){
+			classObj.imports.push(topics.columns[column]) ;
+			size++;
+		}
+	}
+	classObj.size = size;
+
+	classArray.push(classObj);
+
+ }
+ return classArray;
+}
+
+
+
+
+</script>
+
+</body>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js & color palette-->
+<script src="https://d3js.org/d3.v4.js"></script>
+<body>
+<!-- Create a div where the graph will take place -->
+<div id="main">
+    <h1>"Not my War"</h1>
+    <h2>An examination of State of the Union Addresses <br>from Seated Presidents during the Vietnam War</h2>
+<div id="barChart" style="margin:0;text-align:center;padding:30px;"></div>
+</div>
+<style>
+ body {
+     background-color: #e1e0dd;
+     margin: 0 auto;
+     padding: 70px;
+ }
+ 
+ .main {
+     margin: 0 auto;
+     width: 50%;
+ }
+
+h1 { 
+     color: #3D5367;
+     font-family: 'Open Sans Condensed', sans-serif; 
+     font-size: 40px; font-weight: 700; 
+     line-height: 50px; margin: 0 0 0; 
+     padding: 20px 30px; 
+     text-align: center; 
+     text-transform: uppercase; }
+
+
+h2 { 
+    color: #3D5367; 
+    font-family: 'Open Sans Condensed', sans-serif; 
+    font-size: 24px; 
+    font-weight: 700; 
+    line-height: 35px; 
+    margin: 0 0 24px; 
+    padding: 0 30px; 
+    text-align: center; 
+    text-transform: uppercase; }
+ 
+</style>
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 20, left: 50},
+    width = 700 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#barChart")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+
+    
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")")
+ 
+
+//set color of background
+svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "#e1e0dd")
+
+
+
+    
+// Parse the Data
+d3.csv("https://raw.githubusercontent.com/m0llyc00k/dvia/master/week-7/practice-text-exercises/sotu-data/sotu-data-simple-5.csv", function(data) {
+
+  // List of subgroups = header of the csv files = soil condition here
+  var subgroups = data.columns.slice(1)
+
+  // List of groups = species here = value of the first column called group -> I show them on the X axis
+  var groups = d3.map(data, function(d){return(d.word)}).keys()
+
+  // Add X axis
+  var x = d3.scaleBand()
+      .domain(groups)
+      .range([0, width])
+      .padding([0.2])
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).tickSizeOuter(0));
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 130])
+    .range([ height, 0 ]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
+
+  // color palette = one color per subgroup
+  var color = d3.scaleOrdinal()
+    .domain(subgroups)
+    .range(["#f77165","#7ba8ce","#9ad78c","#be99ca"]);
+
+  //stack the data? --> stack per subgroup
+  var stackedData = d3.stack()
+    .keys(subgroups)
+    (data)
+
+//make a key to the right
+svg.append("rect").attr("x",390).attr("y",30).attr("width", 15).attr("height", 15).style("fill", "#f77165")
+svg.append("rect").attr("x",390).attr("y",60).attr("width", 15).attr("height", 15).style("fill", "#7ba8ce")
+svg.append("rect").attr("x",390).attr("y",90).attr("width", 15).attr("height", 15).style("fill", "#9ad78c")
+svg.append("rect").attr("x",390).attr("y",120).attr("width", 15).attr("height", 15).style("fill", "#be99ca")
+svg.append("text").attr("x", 420).attr("y", 40).text("EISENHOWER, 1956 & 1961").style("font-family", "Open Sans Condensed, sans-serif").style("font-size", "12px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 420).attr("y", 70).text("KENNEDY, 1962 & 1963").style("font-family", "Open Sans Condensed, sans-serif").style("font-size", "12px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 420).attr("y", 100).text("JOHNSON, 1964 & 1969").style("font-family", "Open Sans Condensed, sans-serif").style("font-size", "12px").attr("alignment-baseline","middle")
+svg.append("text").attr("x", 420).attr("y", 130).text("NIXON, 1970 & 1974").style("font-family", "Open Sans Condensed, sans-serif").style("font-size", "12px").attr("alignment-baseline","middle")
+
+
+//highlight on hover
+
+  // What happens when user hover a bar
+  var mouseover = function(d) {
+    // what subgroup are we hovering?
+    var subgroupName = d3.select(this.parentNode).datum().key; 
+    var subgroupValue = d.data[subgroupName];
+    // Reduce opacity of all rect to 0.2
+    d3.selectAll(".myRect").style("opacity", 0.2)
+    // Highlight all rects of this subgroup with opacity 0.8. It is possible to select them since they have a specific class = their name.
+    d3.selectAll("."+subgroupName)
+      .style("opacity", 1)
+    }
+
+  // When user do not hover anymore
+  var mouseleave = function(d) {
+    // Back to normal opacity: 0.8
+    d3.selectAll(".myRect")
+      .style("opacity",0.8)
+    }
+
+  // Show the bars
+  svg.append("g")
+    .selectAll("g")
+    // Enter in the stack data = loop key per key = group per group
+    .data(stackedData)
+    .enter().append("g")
+      .attr("fill", function(d) { return color(d.key); })
+      .attr("class", function(d){ return "myRect " + d.key }) // Add a class to each subgroup: their name
+      .selectAll("rect")
+      // enter a second time = loop subgroup per subgroup to add all rectangles
+      .data(function(d) { return d; })
+      .enter().append("rect")
+        .attr("x", function(d) { return x(d.data.word); })
+        .attr("y", function(d) { return y(d[1]); })
+        .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+        .attr("width",x.bandwidth())
+        .attr("stroke", "light-gray")
+        .attr("color", "white")
+      .on("mouseover", mouseover)
+      .on("mouseleave", mouseleave)
+
+})
+
+</script>
+</body>

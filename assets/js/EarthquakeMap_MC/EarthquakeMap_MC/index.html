@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <title>USGS Earthquakes</title>
+
+  <!-- https://d3js.org/ -->
+  <script src='https://d3js.org/d3.v7.min.js'></script>
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    #map {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      margin: auto auto;
+    }
+
+    .markerAll {
+      /*width: 5px;*/
+      /*height: 5px;*/
+      background-color: navy;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: .3;
+    }
+    
+    .markerAll : hover {
+      opacity: 1;
+      background-color: red;
+    }
+
+    svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .mapboxgl-popup {
+      max-width: 150px;
+    }
+
+    .mapboxgl-popup-content {
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    text {
+      font-size: 12pt;
+      font-weight: bold;
+    }
+
+    h3 {
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    h4 {
+      font-size: 14px;
+      color: navy;
+    }
+
+    p {
+      margin: 10px;
+    }
+
+    .map-overlay {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: #fff;
+      margin-right: 20px;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+      border-radius: 3px;
+    }
+
+    #features {
+      top: 0;
+      height: 145px;
+      margin-top: 20px;
+      width: 320px;
+      text-align: center;
+    }
+
+    #legend {
+      padding: 10px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 20px;
+      height: 120px;
+      margin-bottom: 40px;
+      width: 130px;
+    }
+
+    .legend-key {
+      display: inline-block;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
+    }
+
+    img {
+      max-width: 25%;
+    }
+  </style>
+
+
+
+</head>
+
+<body>
+  <div id='map'></div>
+  <div id="legend1" style="display: inline-block"></div>
+  <div class='map-overlay' id='features'>
+    <h3>Earthquakes from 11/02/21 - 11/09/21</h3>
+    <div id='pd'>
+      <h4>Click dots to view details</h4>
+      <p><em>Data from <a href="https://earthquake.usgs.gov/">USGS</a><br><img src="1280px-USGS_logo.svg.png" alt="usgs-logo"></a></em></p>
+    </div>
+  </div>
+  <div class='map-overlay' id='legend'></div>
+  <script src="script.js"></script>
+</body>

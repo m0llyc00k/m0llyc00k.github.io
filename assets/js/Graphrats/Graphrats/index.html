@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Black&family=Hepta+Slab:wght@400;500&family=Josefin+Slab:wght@200;500;600&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Black&family=Hepta+Slab:wght@400;500&family=Josefin+Slab:wght@200;500;600&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Black&family=Josefin+Slab:wght@200;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Black&family=Hepta+Slab:wght@400;500&family=Josefin+Slab:wght@200;500;600&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <!--<script src="https://d3js.org/d3.v7.min.js"></script>-->
+    <!--<script src="https://d3js.org/d3.v5.min.js"></script>-->
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row align-items-center align-self-center">
+            <div class="col-sm-3" id="left-panel" style="padding-top: 20px">
+
+                <div class="well">
+                    <h1 style="font-size: 26px; text-align:center; color: #213441">THE RATS HAVE RISEN</h1>
+                    <img src="more-rats-pic.svg" height="" width="320" alt="rats">
+                </div>
+                <div class="alert alert-success fade in" style="background-color: #A6ADB3; color: #213441">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <p><strong><em>Rats!</em></strong></p>
+                    <p>hover over graph to see details</p>
+                </div>
+                <div class="well">
+                    <p>
+                        <strong>The New York Times wrote: <br><em>“...add a plague of rats to everything else New York faces in trying to rebound from the Covid-19 pandemic”</em></strong><br><br>
+
+                        Based on recent articles from the NYT, this visualization compares rat sighting data from 2020-2021 and asks the question, have rats really taken over since the start of the pandemic?
+                        <br><br><br>
+                        Data from <a href="https://data.cityofnewyork.us/Social-Services/Rat-Sightings/3q43-55fe">NYC Open Data</a>
+                    </p>
+                </div>
+
+                <div class="well">
+                    <p>Additional Resources:</p>
+                    <ul>
+                    <li>
+                        <a href="https://www.nytimes.com/2021/11/05/nyregion/nyc-rats-sightings.html">N.Y.C. Rats: They’re in the Park, on Your Block and Even at Your Table</a><br>
+                    </li>
+                    <li>
+                        <a href="https://www.nytimes.com/2021/11/08/nyregion/an-urban-problem-rats-on-the-rise.html">An Urban Problem: Rats on the Rise</a><br>
+                    </li>
+                    <li>
+                        <a href="https://www.investopedia.com/historical-timeline-of-covid-19-in-new-york-city-5071986">NYC Pandemic Timeline</a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-9" id="rats-graph" style="padding-left: 50px">
+                <div id="svg-wrapper" style="display:inline-block;position:relative;">
+                    <svg width="900" height="900" font-family="sans-serif" font-size="10"></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="d3-scale-radial.js"></script>
+    <script src="app.js"></script>
+</body>

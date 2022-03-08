@@ -1,0 +1,205 @@
+{
+    "name": "MME",
+    "children": [{
+            "name": "Potency",
+            "children": [{
+
+                    "name": "CODEINE",
+                    "children": [
+                        { "size": 0.3 },
+                        { "size": 0 }
+                    ]
+                },
+                {
+                    "name": "HYDROCODONE",
+                    "children": [
+                        { "size": 1 },
+                        { "size": 0 },
+                        { "size": 0 },
+                        { "size": 0 }
+
+                    ]
+                },
+                {
+                    "name": "OXYCODONE",
+                    "children": [
+                        { "size": 1 },
+                        { "size": 0.5 }
+                    ]
+                },
+                {
+                    "name": "METHADONE",
+                    "children": [
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 }
+
+                    ]
+                },
+                {
+                    "name": "HEROIN",
+                    "children": [
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 }
+
+                    ]
+                },
+                {
+                    "name": "BUPRENORPHINE",
+                    "children": [
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 }
+
+                    ]
+                },
+                {
+                    "name": "Fentynal",
+                    "children": [
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 },
+                        { "size": 1 }
+                    ]
+                }
+            ]
+        }
+
+    ]
+}

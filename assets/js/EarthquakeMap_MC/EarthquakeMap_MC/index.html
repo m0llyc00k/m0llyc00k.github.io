@@ -31,7 +31,7 @@
       opacity: .3;
     }
     
-    .markerAll : hover {
+    .markerAll:hover {
       opacity: 1;
       background-color: red;
     }
@@ -113,6 +113,16 @@
     img {
       max-width: 25%;
     }
+    
+    .dot {
+      height: 15px;
+      width: 15px;
+      background-color: navy;
+      border-radius: 50%;
+      display: inline-block;
+      opacity: .5;
+    }
+    
   </style>
 
 
@@ -125,8 +135,8 @@
   <div class='map-overlay' id='features'>
     <h3>Earthquakes from 11/02/21 - 11/09/21</h3>
     <div id='pd'>
-      <h4>Click dots to view details</h4>
-      <p><em>Data from <a href="https://earthquake.usgs.gov/">USGS</a><br><img src="1280px-USGS_logo.svg.png" alt="usgs-logo"></a></em></p>
+      <h4>Click dots to view details <span class="dot"></h4>
+      <p><img src="1280px-USGS_logo.svg.png" alt="usgs-logo"></span></p>
     </div>
   </div>
   <div class='map-overlay' id='legend'></div>

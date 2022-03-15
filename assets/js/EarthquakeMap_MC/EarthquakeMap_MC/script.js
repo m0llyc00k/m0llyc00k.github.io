@@ -45,12 +45,21 @@ d3.json('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_
         all.style.width = `${width}px`;
         all.style.height = `${height}px`;
 
+        //time parse
+        const time = d["time"];
+        const strictIsoParse = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
+        const formatTime = d3.utcParse("%B %A %-d, %Y");
+
+        //console.log(strictIsoParse(time))
+        
+        
 
         // make a marker for each feature and add to the map
         new mapboxgl.Marker(all)
           .setLngLat([d.longitude, d.latitude])
           .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-            .setHTML('<h2>' + 'Place: ' + d.place + '</h2>' + '</br>' + '<h3>' + 'Magnitude: ' + d.mag + '</h3>' + '</br>' + '<h3>' + 'Time: ' + d.time + '</h3>'))
+//             .setHTML('<h2>' + 'Place: ' + d.place + '</h2>' + '</br>' + '<h3>' + 'Magnitude: ' + d.mag + '</h3>' + '</br>' + '<h3>' + 'Time: ' + d.time + '</h3>'))
+               .setHTML('<p><b>' + d.place + '</b></p>' + '<p><b>' + 'Magnitude: </b>' + d.mag + '</p>' + '<p>' + '<b>Time:</b> ' + strictIsoParse(time) + '</p>'))
           .addTo(map);
 
       });

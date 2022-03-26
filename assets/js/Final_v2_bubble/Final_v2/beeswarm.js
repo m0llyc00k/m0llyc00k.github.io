@@ -17,7 +17,7 @@ $(document).ready(function() {
 });
 
 //set up beeswarm
-let height = 850;
+let height = 750;
 let width = 1130;
 let margin = ({ top: 20, right: 100, bottom: 40, left: 20 });
 let allDates = [];
@@ -293,6 +293,38 @@ d3.csv("./beeswarm-data-new-rev_nov20.csv").then(function(data) {
             me.classed("selected", !me.classed("selected"))
         };
 
+
+    function handleMouseOver2(d, i) {
+
+        d3.select(this)
+            .attr("r", 50)
+            .style("fill", function(d) {
+                return "url(#" + d.id + ")";
+            })
+
+            .raise()
+
+        d3.selectAll("circle.selected")
+            .style("fill", function(d) {
+                return "url(#" + d.id + ")"
+            })
+    }
+
+
+    function handleMouseOut2(d, i) {
+        // Use D3 to select element, change color back to normal
+        d3.select(this)
+            .attr("r", 13)
+            .style("fill", function(d, i) { return color(d.typeSort); })
+        tooltip.style("opacity", 0);
+        xLine.attr("opacity", 0);
+        d3.selectAll("circle.selected")
+            .style("fill", function(d) {
+                return "url(#" + d.id + ")"
+            })
+
+    };
+    
         function clicked(d) {
 
             var me = d3.select(this)

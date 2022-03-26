@@ -1,0 +1,157 @@
+/* Import and use the Inter font https://rsms.me/inter/ */
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em 2em;
+    font-family: 'Inter var', sans-serif;
+    font-size: 16px;
+    color: #34495e;
+    background: #f8f9fa;
+}
+
+.title {
+    position: relative;
+    width: 600px;
+    margin-top: .3em;
+    margin-bottom: .3em;
+    line-height: 1.2em;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-feature-settings: 'tnum' 1;
+}
+
+.grid-line {
+    stroke: #dadadd;
+    fill: none;
+}
+
+.tick-label {
+    dominant-baseline: middle;
+    fill: #8395a7;
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+}
+
+.tick-label-temperature {
+    fill: #8395a7;
+    opacity: 0.7;
+    dominant-baseline: middle;
+    font-size: 0.7em;
+}
+
+.freezingCircle {
+    fill: skyblue;
+    opacity: 0.5;
+}
+
+.day-line {
+    stroke: #dadadd;
+    stroke-width: 3;
+}
+
+.cloud-dot {
+    fill: #c8d6e5;
+    /*opacity: 0.8;*/
+    mix-blend-mode: multiply;
+}
+
+.humidity-dot {
+    fill: #d8d2e7;
+    /*opacity: 0.8;*/
+}
+
+.precipitation-dot {
+    /*opacity: 0.7;*/
+    mix-blend-mode: multiply;
+}
+
+.annotation-line {
+    stroke: gray;
+    /*opacity: 0.4;*/
+}
+
+.annotation-text {
+    fill: gray;
+    font-size: 0.7em;
+    dominant-baseline: middle;
+}
+
+svg {
+    overflow: visible;
+}
+
+.wrapper {
+    position: relative;
+}
+
+
+.tooltip {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15em;
+    padding: 0.6em 1em;
+    background: #fff;
+    text-align: center;
+    line-height: 1.4em;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.tooltip-date {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+    font-size: 1.1em;
+    line-height: 1.4em;
+}
+
+.tooltip-temperature {
+    font-feature-settings: 'tnum' 1;
+}
+
+.tooltip-metric {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.8em;
+    line-height: 1.3em;
+    transition: all 0.1s ease-out;
+}
+
+.tooltip-metric div:first-child {
+    font-weight: 800;
+    padding-right: 1em;
+}
+
+.tooltip-metric div:nth-child(2) {
+    font-feature-settings: 'tnum' 1;
+}
+
+.tooltip-cloud {
+    color: #8395a7;
+}
+.tooltip-humidity {
+    color: #bbb1d5;
+}
+
+.listener-circle {
+    fill: transparent;
+}
+
+.tooltip-line {
+    pointer-events: none;
+    fill: #8395a7;
+    /*fill-opacity: 0.2;*/
+    mix-blend-mode: multiply;
+}

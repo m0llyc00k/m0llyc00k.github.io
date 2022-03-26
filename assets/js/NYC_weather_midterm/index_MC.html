@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./styles_MC.css" type="text/css">
+    </link>
+
+    <title>NYC Weather: 30 Day Forecast</title>
+</head>
+
+<body>
+    <h2 class="title">
+        New York City Weather: 30 Day Forecast
+    </h2>
+    <h4>Today:</h4>
+<br><br><br>
+    <div id="wrapper" class="wrapper">
+
+        <div id="tooltip" class="tooltip">
+            <div id="tooltip-date" class="tooltip-date"></div>
+            <div id="tooltip-temperature" class="tooltip-temperature">
+                <span id="tooltip-temperature-min"></span>
+                -
+                <span id="tooltip-temperature-max"></span>
+            </div>
+            <div class="tooltip-metric tooltip-humidity">
+                <div>Humidity</div>
+                <div id="tooltip-humidity"></div>
+            </div>
+            <div class="tooltip-metric tooltip-cloud">
+                <div>Cloud Cover</div>
+                <div id="tooltip-cloud"></div>
+            </div>
+            <div class="tooltip-metric tooltip-precipitation">
+                <div>Precipitation Probability</div>
+                <div id="tooltip-precipitation"></div>
+            </div>
+            <div class="tooltip-metric tooltip-precipitation-type">
+                <div>Weather</div>
+                <div id="tooltip-precipitation-type"></div>
+            </div>
+            <!-- <div class="tooltip-metric tooltip-sunrise">-->
+            <!--    <div>Sunrise</div>-->
+            <!--    <div id="tooltip-sunrise"></div>-->
+            <!--</div>-->
+            <!-- <div class="tooltip-metric tooltip-sunset">-->
+            <!--    <div>Sunset</div>-->
+            <!--    <div id="tooltip-sunset"></div>-->
+            <!--</div>-->
+        </div>
+        
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="./script2.js"></script>
+</body>
+
+</html>

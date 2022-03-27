@@ -5,6 +5,7 @@
 
 const url = "https://pro.openweathermap.org/data/2.5/forecast/climate?lat=40.781464&lon=-73.966696&units=imperial&appid=0353e66df6f1bec42f85ab2aa62ad775"
 
+
 function fetchSearchData() {
 
     fetch(url)
@@ -58,7 +59,8 @@ function drawChart(newData) {
     const temperatureMaxAccessor = d => d.temp.max
     const dayAccessor = d => d.date
     const humidityAccessor = d => d.humidity
-    const precipitationProbabilityAccessor = d => d.rain
+    const rainAccessor = d => d.rain
+    const snowAccessor = d => d.snow
     const precipitationTypeAccessor = d => d.weather[0].main
     const weatherType = d => d.weather[0].description
     const cloudAccessor = d => d.clouds
@@ -70,7 +72,7 @@ function drawChart(newData) {
     console.log(sunriseFormat(newData[0]))
 
 
-    console.log(sunFormatter(sunriseAccessor([newData[0]])))
+    // console.log(sunFormatter(sunriseAccessor([newData[0]])))
 
 
 
@@ -180,14 +182,18 @@ function drawChart(newData) {
         .domain(d3.extent(newData, humidityAccessor))
         .range([1, 10])
 
-    const precipitationTypes = ["rain", "sleet", "snow"]
+    const precipitationTypes = ["rain", "clouds", "snow"]
     const precipitationTypeColorScale = d3.scaleOrdinal()
         .domain(precipitationTypes)
         .range(["cornflowerblue", "#636e72", "#b2bec3"])
 
-    const precipitationRaduisScale = d3.scaleSqrt()
-        .domain(d3.extent(newData, precipitationProbabilityAccessor))
-        .range([0, 8])
+    const rainRaduisScale = d3.scaleSqrt()
+        .domain(d3.extent(newData, rainAccessor))
+        .range([0, 10])
+
+    const snowRaduisScale = d3.scaleSqrt()
+        .domain(d3.extent(newData, snowAccessor))
+        .range([0, 10])
 
     // 6. Draw peripherals
 
@@ -215,10 +221,10 @@ function drawChart(newData) {
 
 
     const peripherals = bounds.append("g")
-    const months = d3.timeDay.range(...angleScale.domain())
+    const days = d3.timeDay.range(...angleScale.domain())
 
-    months.forEach(month => {
-        const angle = angleScale(month)
+    days.forEach(day => {
+        const angle = angleScale(day)
         const [x, y] = getCoordinatesForAngle(angle, 1)
         // console.log(getCoordinatesForAngle(angle, 1))
 
@@ -230,7 +236,7 @@ function drawChart(newData) {
 
         const [labelx, labely] = getCoordinatesForAngle(angle, 2)
         peripherals.append("text")
-            .text(d3.timeFormat("%b %d")(month))
+            .text(d3.timeFormat("%b %d")(day))
             .attr("x", labelx)
             .attr("y", labely)
             .attr("class", "tick-label")
@@ -285,7 +291,7 @@ function drawChart(newData) {
     //outer circles
 
     const cloudGroup = bounds.append("g")
-    const cloudOffset = 1.5
+    const cloudOffset = 1.65
     const cloudDots = cloudGroup.selectAll("circle")
         .data(newData)
         .join("circle")
@@ -305,25 +311,46 @@ function drawChart(newData) {
         .attr("class", "humidity-dot")
 
 
-    const precipitationGroup = bounds.append("g")
-    const precipitationOffset = 1.35
-    const precipitationDots = precipitationGroup.selectAll("circle")
+    // const precipitationGroup = bounds.append("g")
+    // const precipitationOffset = 1.35
+    // const precipitationDots = precipitationGroup.selectAll("circle")
+    //     .data(newData)
+    //     .join("circle")
+    //     .attr("r", d => precipitationRaduisScale(precipitationProbabilityAccessor(d)))
+    //     .attr("cx", d => getXFromDataPoint(d, precipitationOffset))
+    //     .attr("cy", d => getYFromDataPoint(d, precipitationOffset))
+    //     .style("fill", d => precipitationTypeColorScale(
+    //         precipitationTypeAccessor(d)))
+    //     .attr("class", "precipitation-dot")
+
+    const rainGroup = bounds.append("g")
+    const rainOffset = 1.34
+    const rainDots = rainGroup.selectAll("circle")
         .data(newData)
         .join("circle")
-        .attr("r", d => precipitationRaduisScale(precipitationProbabilityAccessor(d)))
-        .attr("cx", d => getXFromDataPoint(d, precipitationOffset))
-        .attr("cy", d => getYFromDataPoint(d, precipitationOffset))
-        .style("fill", d => precipitationTypeColorScale(
-            precipitationTypeAccessor(d)))
-        .attr("class", "precipitation-dot")
+        .attr("r", d => rainRaduisScale(rainAccessor(d)))
+        .attr("cx", d => getXFromDataPoint(d, rainOffset))
+        .attr("cy", d => getYFromDataPoint(d, rainOffset))
+        .attr("class", "rain-dot")
+
+    const snowGroup = bounds.append("g")
+    const snowOffset = 1.47
+    const snowDots = snowGroup.selectAll("circle")
+        .data(newData)
+        .join("circle")
+        .attr("r", d => snowRaduisScale(snowAccessor(d)))
+        .attr("cx", d => getXFromDataPoint(d, snowOffset))
+        .attr("cy", d => getYFromDataPoint(d, snowOffset))
+        .attr("class", "snow-dot")
 
 
 
-    drawAnnotation(Math.PI * 0.24, humidityOffset + .04, "Humidity")
-    drawAnnotation(Math.PI * 0.2, cloudOffset + .04, "Cloudiness")
-    drawAnnotation(Math.PI * 0.26, precipitationOffset, "Precipitation")
+    drawAnnotation(Math.PI * 0.3, humidityOffset , "Humidity")
+    drawAnnotation(Math.PI * 0.195, cloudOffset , "Cloudiness")
+    drawAnnotation(Math.PI * 0.24, rainOffset , "Rain")
+    drawAnnotation(Math.PI * 0.26, snowOffset , "Snow")
     drawAnnotation(Math.PI * 0.65, 0.5, "Temperature")
-    drawAnnotation(Math.PI * 0.72, radiusScale(32) / dimensions.boundedRadius, "Freezing Temperature")
+    drawAnnotation(Math.PI * 0.72, radiusScale(32) / dimensions.boundedRadius, "Freezing Temperature (32\xB0F)")
 
     //   // 7. Set up interactions
 
@@ -378,6 +405,10 @@ function drawChart(newData) {
         const dataPoint = newData.find(d => d.date == dateString)
         if (!dataPoint) return
 
+        const noValue = NaN
+
+
+
         tooltip.select("#tooltip-date")
             .text(d3.timeFormat("%B %-d")(date))
         tooltip.select("#tooltip-temperature-min")
@@ -389,13 +420,39 @@ function drawChart(newData) {
           temperatureMaxAccessor(dataPoint))
         }	\xB0F`)
         tooltip.select("#tooltip-humidity")
-            .text(humidityAccessor(dataPoint))
+            .html(`${d3.format(".1f")(
+          humidityAccessor(dataPoint))
+        }	%`)
         tooltip.select("#tooltip-cloud")
-            .text(cloudAccessor(dataPoint))
-        tooltip.select("#tooltip-precipitation")
-            .text(
-                precipitationProbabilityAccessor(dataPoint)
-            )
+            .html(`${d3.format(".1f")(
+          cloudAccessor(dataPoint))
+        }	%`)
+
+
+        if (snowAccessor(dataPoint) != undefined) {
+            tooltip.select("#tooltip-snow")
+                .html(`${d3.format(".1f")(
+                snowAccessor(dataPoint))
+        }	mm`)
+        }
+        else {
+            tooltip.select("#tooltip-snow")
+                .text('none')
+        }
+
+
+        if (rainAccessor(dataPoint) != undefined) {
+            tooltip.select("#tooltip-rain")
+                .html(`${d3.format(".1f")(
+            rainAccessor(dataPoint))
+        }	mm`)
+        
+        } else {
+            tooltip.select("#tooltip-rain")
+                .text('none')
+        }
+        
+        
         tooltip.select("#tooltip-precipitation-type")
             .text(weatherType(dataPoint))
         // tooltip.select("#tooltip-sunrise")
@@ -416,10 +473,14 @@ function drawChart(newData) {
             .style("color", temperatureColorScale(
                 temperatureMaxAccessor(dataPoint)
             ))
-        tooltip.select("#tooltip-sunrise")
-            .style("color", "#feca57")
-        tooltip.select("#tooltip-sunset")
-            .style("color", "#fe7757")
+        tooltip.select("#tooltip-rain")
+            .style("color", "cornflowerblue")
+        tooltip.select("#tooltip-snow")
+            .style("color", "#8791a3")
+        // tooltip.select("#tooltip-sunrise")
+        //     .style("color", "#feca57")
+        // tooltip.select("#tooltip-sunset")
+        //     .style("color", "#fe7757")
     }
 
     function onMouseLeave() {
@@ -431,4 +492,3 @@ function drawChart(newData) {
 
 
 }
-drawChart()

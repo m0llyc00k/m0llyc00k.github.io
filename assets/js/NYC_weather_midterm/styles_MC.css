@@ -1,6 +1,9 @@
 /* Import and use the Inter font https://rsms.me/inter/ */
 @import url('https://rsms.me/inter/inter.css');
-html { font-family: 'Inter', sans-serif; }
+
+html {
+    font-family: 'Inter', sans-serif;
+}
 
 body {
     display: flex;
@@ -24,7 +27,7 @@ body {
     text-align: center;
     display: flex;
     align-items: center;
-    font-feature-settings: 'tnum' 1;
+    font-feature-settings: 'tnum'1;
 }
 
 .grid-line {
@@ -68,8 +71,15 @@ body {
     /*opacity: 0.8;*/
 }
 
-.precipitation-dot {
-    /*opacity: 0.7;*/
+.rain-dot {
+    opacity: 0.7;
+    fill: cornflowerblue;
+    mix-blend-mode: multiply;
+}
+
+.snow-dot {
+    opacity: 0.7;
+    fill: #636e72;
     mix-blend-mode: multiply;
 }
 
@@ -117,7 +127,7 @@ svg {
 }
 
 .tooltip-temperature {
-    font-feature-settings: 'tnum' 1;
+    font-feature-settings: 'tnum'1;
 }
 
 .tooltip-metric {
@@ -135,12 +145,13 @@ svg {
 }
 
 .tooltip-metric div:nth-child(2) {
-    font-feature-settings: 'tnum' 1;
+    font-feature-settings: 'tnum'1;
 }
 
 .tooltip-cloud {
     color: #8395a7;
 }
+
 .tooltip-humidity {
     color: #bbb1d5;
 }
@@ -154,4 +165,17 @@ svg {
     fill: #8395a7;
     /*fill-opacity: 0.2;*/
     mix-blend-mode: multiply;
+}
+
+.tooltip-rain {
+    color: cornflowerblue;
+}
+
+.tooltip-snow {
+    color: #8791a3;
+}
+
+.tooltip-precipitation-type {
+    margin-bottom: 8px;
+    margin-top: 8px;
 }

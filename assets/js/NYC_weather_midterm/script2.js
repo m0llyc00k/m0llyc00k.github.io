@@ -182,10 +182,10 @@ function drawChart(newData) {
         .domain(d3.extent(newData, humidityAccessor))
         .range([1, 10])
 
-    const precipitationTypes = ["rain", "clouds", "snow"]
+    const precipitationTypes = ["rain", "clouds", "snow", "humidity"]
     const precipitationTypeColorScale = d3.scaleOrdinal()
         .domain(precipitationTypes)
-        .range(["cornflowerblue", "#636e72", "#b2bec3"])
+        .range(["cornflowerblue", "#636e72", "#b2bec3", "#d8d2e7"])
 
     const rainRaduisScale = d3.scaleSqrt()
         .domain(d3.extent(newData, rainAccessor))
@@ -310,19 +310,6 @@ function drawChart(newData) {
         .attr("cy", d => getYFromDataPoint(d, humidityOffset))
         .attr("class", "humidity-dot")
 
-
-    // const precipitationGroup = bounds.append("g")
-    // const precipitationOffset = 1.35
-    // const precipitationDots = precipitationGroup.selectAll("circle")
-    //     .data(newData)
-    //     .join("circle")
-    //     .attr("r", d => precipitationRaduisScale(precipitationProbabilityAccessor(d)))
-    //     .attr("cx", d => getXFromDataPoint(d, precipitationOffset))
-    //     .attr("cy", d => getYFromDataPoint(d, precipitationOffset))
-    //     .style("fill", d => precipitationTypeColorScale(
-    //         precipitationTypeAccessor(d)))
-    //     .attr("class", "precipitation-dot")
-
     const rainGroup = bounds.append("g")
     const rainOffset = 1.34
     const rainDots = rainGroup.selectAll("circle")
@@ -345,12 +332,30 @@ function drawChart(newData) {
 
 
 
-    drawAnnotation(Math.PI * 0.3, humidityOffset , "Humidity")
-    drawAnnotation(Math.PI * 0.195, cloudOffset , "Cloudiness")
-    drawAnnotation(Math.PI * 0.24, rainOffset , "Rain")
-    drawAnnotation(Math.PI * 0.26, snowOffset , "Snow")
+    // drawAnnotation(Math.PI * 0.3, humidityOffset , "Humidity")
+    // drawAnnotation(Math.PI * 0.195, cloudOffset , "Cloudiness")
+    // drawAnnotation(Math.PI * 0.24, rainOffset , "Rain")
+    // drawAnnotation(Math.PI * 0.26, snowOffset , "Snow")
     drawAnnotation(Math.PI * 0.65, 0.5, "Temperature")
     drawAnnotation(Math.PI * 0.72, radiusScale(32) / dimensions.boundedRadius, "Freezing Temperature (32\xB0F)")
+    
+     precipitationTypes.forEach((precipitationType, index) => {
+    const labelCoordinates = getCoordinatesForAngle(Math.PI * 0.28, 3.0)
+
+    annotationGroup.append("circle")
+      .attr("cx", labelCoordinates[0] + 15)
+      .attr("cy", labelCoordinates[1] + (16 * (index + 1)))
+      .attr("r", 4)
+      .attr("fill", precipitationTypeColorScale(precipitationType))
+      .style("opacity", 0.7)
+    annotationGroup.append("text")
+      .attr("x", labelCoordinates[0] + 25)
+      .attr("y", labelCoordinates[1] + (16 * (index + 1)))
+      .text(precipitationType)
+      .attr("class", "annotation-text")
+
+  })
+
 
     //   // 7. Set up interactions
 

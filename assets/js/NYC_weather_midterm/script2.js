@@ -102,7 +102,7 @@ form.addEventListener("submit", e => {
 
         // 2. Create chart dimensions
 
-        const width = 600
+        const width = 575
         let dimensions = {
             width: width,
             height: width,

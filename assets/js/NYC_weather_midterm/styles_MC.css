@@ -18,8 +18,8 @@ body {
 
 #title {
     position: relative;
-    width: 600px;
-    margin-top: .3em;
+    width: 575px;
+    margin-top: 0em;
     margin-bottom: .3em;
     line-height: 1.2em;
     display: flex;
@@ -27,7 +27,6 @@ body {
     text-align: center;
     align-items: center;
     font-family: 'Inter', sans-serif;
-    font-feature-settings: 'tnum'1;
     font-weight: bold;
     font-size: 24px;
 }
@@ -185,20 +184,25 @@ svg {
 }
 
 button {
-  transition-duration: 0.4s;
-  background-color: cornflowerblue;
-  color: #f8f9fa;
-  border: 2px solid cornflowerblue;
-  font-family: 'Inter var', sans-serif;
+    transition-duration: 0.4s;
+    background-color: cornflowerblue;
+    color: #f8f9fa;
+    border: 2px solid cornflowerblue;
+    font-family: 'Inter var', sans-serif;
 }
 
 button:hover {
-  background-color: skyblue; /* Green */
-  color: white;
+    background-color: skyblue;
+    /* Green */
+    color: white;
 }
+
 
 input {
     font-family: 'Inter var', sans-serif;
-    color: #34495e;
-    border: 1px;
+}
+
+input[type=text]:focus {
+    font-family: 'Inter var', sans-serif;
+    border: 0px solid #555;
 }

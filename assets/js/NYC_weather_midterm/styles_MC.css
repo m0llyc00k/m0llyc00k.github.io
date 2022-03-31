@@ -16,7 +16,7 @@ body {
     background: #f8f9fa;
 }
 
-.title {
+#title {
     position: relative;
     width: 600px;
     margin-top: .3em;
@@ -25,9 +25,11 @@ body {
     display: flex;
     justify-content: center;
     text-align: center;
-    display: flex;
     align-items: center;
+    font-family: 'Inter', sans-serif;
     font-feature-settings: 'tnum'1;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .grid-line {
@@ -61,9 +63,8 @@ body {
 }
 
 .cloud-dot {
-    fill: #b2bec3;
-    /*opacity: 0.8;*/
-    mix-blend-mode: multiply;
+    fill: #c8d6e5;
+    opacity: 1;
 }
 
 .humidity-dot {
@@ -79,7 +80,7 @@ body {
 
 .snow-dot {
     opacity: 0.7;
-    fill: #c8d6e5;
+    fill: #b2bec3;
     mix-blend-mode: multiply;
 }
 
@@ -98,7 +99,7 @@ svg {
     overflow: visible;
 }
 
-.wrapper {
+#wrapper {
     position: relative;
 }
 
@@ -117,6 +118,7 @@ svg {
     border: 1px solid #ddd;
     z-index: 10;
     pointer-events: none;
+
 }
 
 .tooltip-date {
@@ -149,7 +151,8 @@ svg {
 }
 
 .tooltip-cloud {
-    color: #8395a7;
+    /*color: #8395a7;*/
+    color: #c8d6e5;
 }
 
 .tooltip-humidity {
@@ -173,9 +176,29 @@ svg {
 
 .tooltip-snow {
     color: #8791a3;
+    /*color: #b2bec3;*/
 }
 
 .tooltip-precipitation-type {
     margin-bottom: 8px;
     margin-top: 8px;
+}
+
+button {
+  transition-duration: 0.4s;
+  background-color: cornflowerblue;
+  color: #f8f9fa;
+  border: 2px solid cornflowerblue;
+  font-family: 'Inter var', sans-serif;
+}
+
+button:hover {
+  background-color: skyblue; /* Green */
+  color: white;
+}
+
+input {
+    font-family: 'Inter var', sans-serif;
+    color: #34495e;
+    border: 1px;
 }

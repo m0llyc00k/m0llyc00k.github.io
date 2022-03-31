@@ -73,7 +73,7 @@ form.addEventListener("submit", e => {
         // 1. Access data
 
 
-        
+
         //add the date format to the data
         const formatDate = d3.timeFormat("%Y-%m-%d")
         const parseDate = d3.timeParse("%Y-%m-%d")
@@ -401,11 +401,9 @@ form.addEventListener("submit", e => {
         // drawAnnotation(Math.PI * 0.24, rainOffset , "Rain")
         // drawAnnotation(Math.PI * 0.26, snowOffset , "Snow")
         drawAnnotation(Math.PI * 0.65, 0.5, "Temperature")
+        // drawAnnotation(Math.PI * 0.72, radiusScale(32) / dimensions.boundedRadius, "Freezing Temperature (32\xB0F)")
 
-
-        drawAnnotation(Math.PI * 0.72, radiusScale(32) / dimensions.boundedRadius, "Freezing Temperature (32\xB0F)")
-
-
+///add legend on top right
         precipitationTypes.forEach((precipitationType, index) => {
             const labelCoordinates = getCoordinatesForAngle(Math.PI * 0.28, 3.0)
 
@@ -422,6 +420,20 @@ form.addEventListener("submit", e => {
                 .attr("class", "annotation-text")
 
         })
+        
+        
+        const labelCoordinates = getCoordinatesForAngle(Math.PI * 0.28, 3.0)
+            annotationGroup.append("circle")
+            .attr("cx", "405")
+                .attr("cy", "-210")
+                .attr("r", 10)
+                .attr("fill", "skyblue")
+                .style("opacity", 0.7)
+            annotationGroup.append("text")
+                .attr("x", "422")
+                .attr("y", "-210")
+                .text("Freezing Temperature (32\xB0F)")
+                .attr("class", "annotation-text")
 
 
 
@@ -441,6 +453,8 @@ form.addEventListener("submit", e => {
 
         function onMouseMove(e) {
             const [x, y] = d3.pointer(e)
+
+
 
             const getAngleFromCoordinates = (x, y) => (
                 Math.atan2(y, x))
@@ -481,6 +495,10 @@ form.addEventListener("submit", e => {
 
             const noValue = NaN
 
+            const weatherTypes = ["Rain", "Snow", "Clouds"]
+            const weatherTypeColorScale = d3.scaleOrdinal()
+                .domain(weatherTypes)
+                .range(["cornflowerblue", "#b2bec3", "#c8d6e5"])
 
 
             tooltip.select("#tooltip-date")
@@ -532,7 +550,7 @@ form.addEventListener("submit", e => {
                 .text(weatherType(dataPoint))
             tooltip.select(".tooltip-precipitation-type")
                 .style("color", precipitationTypeAccessor(dataPoint) ?
-                    precipitationTypeColorScale(
+                    weatherTypeColorScale(
                         precipitationTypeAccessor(dataPoint)
                     ) :
                     "#dadadd")

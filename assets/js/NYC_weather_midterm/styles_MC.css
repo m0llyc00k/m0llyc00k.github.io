@@ -52,8 +52,8 @@ body {
 }
 
 .freezingCircle {
-    fill: skyblue;
-    opacity: 0.5;
+    fill: #5F8DCE;
+    opacity: 0.4;
 }
 
 .day-line {

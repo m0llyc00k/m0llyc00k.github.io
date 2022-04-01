@@ -5,6 +5,9 @@
 const form = document.querySelector(".top-banner form");
 const input = document.querySelector(".top-banner input");
 const msg = document.querySelector(".top-banner .msg");
+const title = document.getElementById("title")
+const subtitle = document.getElementById("subtitle")
+const city = document.createElement("h2");
 
 //create API key
 const apiKey = "0353e66df6f1bec42f85ab2aa62ad775";
@@ -36,6 +39,9 @@ form.addEventListener("submit", e => {
             .catch(error => {
                 console.log(error);
                 msg.textContent = "Please search for a valid city";
+                title.innerHTML = "30 Day Forecast"
+                subtitle.innerHTML = "Start by searching for a city above..."
+                
             })
 
         msg.textContent = "";
@@ -46,8 +52,6 @@ form.addEventListener("submit", e => {
 
 
     function getTitle(allData) {
-        const title = document.getElementById("title")
-        const city = document.createElement("h2");
         const newTitle = city.innerText = allData.city.name + ", " + allData.city.country;
         title.innerHTML = newTitle + " : 30 Day Forecast";
     }
@@ -403,7 +407,7 @@ form.addEventListener("submit", e => {
         drawAnnotation(Math.PI * 0.65, 0.5, "Temperature")
         // drawAnnotation(Math.PI * 0.72, radiusScale(32) / dimensions.boundedRadius, "Freezing Temperature (32\xB0F)")
 
-///add legend on top right
+        ///add legend on top right
         precipitationTypes.forEach((precipitationType, index) => {
             const labelCoordinates = getCoordinatesForAngle(Math.PI * 0.28, 3.0)
 
@@ -420,20 +424,20 @@ form.addEventListener("submit", e => {
                 .attr("class", "annotation-text")
 
         })
-        
-        
+
+
         const labelCoordinates = getCoordinatesForAngle(Math.PI * 0.28, 3.0)
-            annotationGroup.append("circle")
+        annotationGroup.append("circle")
             .attr("cx", "405")
-                .attr("cy", "-210")
-                .attr("r", 10)
-                .attr("fill", "skyblue")
-                .style("opacity", 0.7)
-            annotationGroup.append("text")
-                .attr("x", "422")
-                .attr("y", "-210")
-                .text("Freezing Temperature (32\xB0F)")
-                .attr("class", "annotation-text")
+            .attr("cy", "-210")
+            .attr("r", 10)
+            .attr("fill", "#5F8DCE")
+            .style("opacity", 0.6)
+        annotationGroup.append("text")
+            .attr("x", "422")
+            .attr("y", "-210")
+            .text("Freezing Temperature (32\xB0F)")
+            .attr("class", "annotation-text")
 
 
 
@@ -450,6 +454,11 @@ form.addEventListener("submit", e => {
         const tooltip = d3.select("#tooltip")
         const tooltipLine = bounds.append("path")
             .attr("class", "tooltip-line")
+
+function onMouseMove2(e) {
+
+}
+
 
         function onMouseMove(e) {
             const [x, y] = d3.pointer(e)
@@ -495,10 +504,10 @@ form.addEventListener("submit", e => {
 
             const noValue = NaN
 
-            const weatherTypes = ["Rain", "Snow", "Clouds"]
+            const weatherTypes = ["Rain", "Snow", "Clouds", "Clear"]
             const weatherTypeColorScale = d3.scaleOrdinal()
                 .domain(weatherTypes)
-                .range(["cornflowerblue", "#b2bec3", "#c8d6e5"])
+                .range(["cornflowerblue", "#b2bec3", "#c8d6e5", "#84cce0"])
 
 
             tooltip.select("#tooltip-date")

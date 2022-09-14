@@ -17,9 +17,9 @@ $(document).ready(function() {
 });
 
 //set up beeswarm
-let height = 700;
+let height = 750;
 let width = 1130;
-let margin = ({ top: 0, right: 100, bottom: 40, left: 20 });
+let margin = ({ top: 20, right: 100, bottom: 40, left: 20 });
 let allDates = [];
 
 // Data structure describing chart scales

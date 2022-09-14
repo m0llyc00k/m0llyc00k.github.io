@@ -51,7 +51,7 @@ p {
     font-weight: 400;
     font-size: 15px;
     color: #b9b6af;
-    padding-top: 50px;
+    padding-top: 10px;
     padding-bottom: 10px;
     /*padding-left: 10px;*/
     display: block;
@@ -66,7 +66,7 @@ label {
 input[type="checkbox"] {
     /*width: 15px;*/
     /*height: 15px;*/
-    padding: 0;
+    padding: 10;
     margin: 0;
     vertical-align: bottom;
     position: relative;
@@ -86,7 +86,7 @@ input[type="checkbox"] {
 
 .col-sm-2 {
     background-color: #343334;
-    padding-top: 0px;
+    padding-top: 50px;
 }
 
 svg {
@@ -138,7 +138,7 @@ div.tooltip {
     max-width: 100%;
     text-align: center;
     height: 100%;
-    width: 95%;
+    width: 85%;
 }
 
 

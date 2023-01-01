@@ -17,7 +17,9 @@ form.addEventListener("submit", e => {
     let inputVal = input.value;
 
     //ajax here
-    const url = `https://pro.openweathermap.org/data/2.5/forecast/climate?q=${inputVal}&appid=${apiKey}&units=imperial`;
+    // const url = `https://pro.openweathermap.org/data/2.5/forecast/climate?q=${inputVal}&appid=${apiKey}&units=imperial`;
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${inputVal}&limit=5&appid=${apiKey}&units=imperial`
+    const url2 = `https://pro.openweathermap.org/data/2.5/forecast/climate?lat=51.5156177&lon=-0.1276474&appid=${apiKey}`
 
     function fetchSearchData() {
 
@@ -28,12 +30,11 @@ form.addEventListener("submit", e => {
 
             .then(function(data) {
                 const dataset = data.list
-                const allData = data
+                console.log(dataset)
 
 
-                drawChart(dataset)
-                console.log(allData)
-                getTitle(allData)
+                // drawChart(dataset)
+                // getTitle(allData)
 
             })
             .catch(error => {
@@ -69,7 +70,7 @@ form.addEventListener("submit", e => {
 
     //////// draw chart in d3 ////////
 
-
+    
     function drawChart(newData) {
 
 

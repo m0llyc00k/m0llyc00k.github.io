@@ -22,7 +22,13 @@ a:hover {
   color: #000;
 }
 
-h1, h2, h3, h4, h5, h6, .font-heading {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
   font-family: "Raleway", sans-serif;
 }
 
@@ -38,7 +44,9 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   padding-right: 10px;
   position: relative;
 }
-.filters a:hover, .filters a:focus, .filters a:active {
+.filters a:hover,
+.filters a:focus,
+.filters a:active {
   text-decoration: none;
 }
 .filters a:hover:before {
@@ -88,6 +96,8 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .item .item-wrap img {
   transition: 0.3s transform ease;
   transform: scale(1);
+  padding: 3px;
+  border: #326f79 1.5px solid;
 }
 .item .item-wrap > .work-info {
   position: absolute;
@@ -167,7 +177,9 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   transition: 0.2s all ease;
   font-weight: 700;
 }
-.readmore:active, .readmore:focus, .readmore:hover {
+.readmore:active,
+.readmore:focus,
+.readmore:hover {
   outline: none;
 }
 .readmore:hover {
@@ -219,7 +231,8 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
 }
-.form-control:active, .form-control:focus {
+.form-control:active,
+.form-control:focus {
   background: #eff1f4;
   outline: none;
   box-shadow: none;
@@ -305,7 +318,8 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .custom-navmenu {
   background: #0d1e2d;
 }
-.custom-navmenu .custom-menu, .custom-navmenu .custom-menu li {
+.custom-navmenu .custom-menu,
+.custom-navmenu .custom-menu li {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -361,7 +375,9 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   position: relative;
 }
 
-.burger:before, .burger span, .burger:after {
+.burger:before,
+.burger span,
+.burger:after {
   width: 100%;
   height: 2px;
   display: block;
@@ -371,9 +387,16 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   opacity: 1;
 }
 
-.burger:before, .burger:after {
-  transition: top 0.35s cubic-bezier(0.23, 1, 0.32, 1), transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1), background-color 1.15s cubic-bezier(0.86, 0, 0.07, 1);
-  -webkit-transition: top 0.35s cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1), background-color 1.15s cubic-bezier(0.86, 0, 0.07, 1);
+.burger:before,
+.burger:after {
+  transition: top 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    background-color 1.15s cubic-bezier(0.86, 0, 0.07, 1);
+  -webkit-transition: top 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    -webkit-transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    background-color 1.15s cubic-bezier(0.86, 0, 0.07, 1);
   content: "";
 }
 
@@ -403,7 +426,8 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   opacity: 0;
 }
 
-.burger.active:before, .burger.active:after {
+.burger.active:before,
+.burger.active:after {
   top: 40%;
 }
 

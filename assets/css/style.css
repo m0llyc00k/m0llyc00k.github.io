@@ -36,6 +36,12 @@ h6,
   padding: 7rem 0;
 }
 
+@media (max-width: 600px) {
+  .section {
+    padding: 2rem 0;
+  }
+}
+
 .filters a {
   text-decoration: none;
   color: #000;
